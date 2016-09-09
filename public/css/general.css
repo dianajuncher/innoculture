@@ -1,0 +1,309 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Bauhaus", "Arial", sans-serif;
+	font-size: 1vw;
+	color: white;
+	background-color: #49545a;
+}
+
+a {
+	text-decoration: none;
+}
+
+.button {
+	display: inline-block;
+	margin: 1em 0;	
+	padding: 0.3em;
+	box-shadow: 0em 0.05em 0.2em #000000;	
+	border-radius: 0.3em;
+	background-color: #6a0676;
+	background-image: none;
+	border-style: none;
+	font-size: 150%;
+	line-height: 1.26em;	
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+.button a {
+	color: white;
+}
+
+.button_small {
+	display: inline-block;
+	font-size: 100%;
+	line-height: 1.3em;
+	padding: 0 0.5em;
+	border: 0.1em solid #ccc;
+	border-radius: 0.4em;
+	color: black;
+	background-color: #eee;
+	margin: 0;
+	cursor: pointer;
+}
+
+
+/* NAVIGATION */
+nav {
+	position: relative;
+	height: 10.97em;
+	background-image: url('../images/header.png');
+	background-size: 100% 100%;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;	
+}
+
+nav .logo {
+	position: absolute;
+	top: 1.74em;
+	left: 1.4em;
+	display: inline-block;
+}
+nav .logo img {
+	width: 13.5em;
+}
+nav .language {
+	display: none;
+	margin-left: 5em;
+}
+nav .title {
+	position: absolute;
+	width: 25em;
+	left: 12.5em;
+	top: 2.3em;
+	font-family: "Bauhaus Demi";
+	font-size: 200%;
+	text-align: center;
+	letter-spacing: 0.05em;		
+}
+nav .menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 100%;	
+	line-height: 1.2em;
+	width: 10em;;
+	text-align: right;
+	cursor: pointer;
+}
+nav .menu .menu-button {
+	position: absolute;
+	top: 2em;
+	right: 2.3em;
+}
+nav .menu .menu-open img {
+	width: 1.3em;
+}
+nav .menu .menu-close img {
+	width: 1em;
+}
+nav .menu .menu-close {
+	display: none;
+}
+nav .menu .menu-dropdown {
+	display: none;
+	position: absolute;
+	top: 4.5em;
+	right: 2.3em;
+	color: white;
+}
+nav .menu .menu-dropdown a {
+	color: white;
+}
+
+/* WRAPPER */
+.wrapper {
+	position: relative;
+}
+
+/* FOOTER */
+.cgl-logo {
+	width: 100%;
+	bottom: 3em;
+	text-align: center;
+}
+.cgl-logo img {
+	width: 9em;
+}
+
+/* GAME SESSIONS */
+#game-list .game-container {
+	position: relative;
+	margin: 2em 0;
+	left: 8em;
+	width: 84em;
+	height: 12em;
+	background-color: #6a7378;
+	border-radius: 0.13em;
+}
+#game-list .game-container div {
+	position: absolute;
+/*	background-color: #9b9b9b;
+	opacity: 0.73;*/
+	background-color: rgba(155,155,155,0.73);
+	border-radius: 0.13em;
+}
+#game-list .game-name, #game-list .game-groups, #game-list .game-scenario, #game-list .game-status, #game-list .game-created {
+	height: 4.125em;
+	width: 17em;
+}
+#game-list .game-name {
+	left: 1.25em;
+	height: 9.5em;
+}
+#game-list .game-name, #game-list .game-groups, #game-list .game-status {
+	top: 1.25em;
+}
+#game-list .game-scenario, #game-list .game-created {
+	top: 6.625em;
+}
+#game-list .game-groups, #game-list .game-scenario {
+	left: 19.5em;
+}
+#game-list .game-status, #game-list .game-created {
+	left: 37.75em;
+}
+#game-list .game-container div .title {
+	position: absolute;
+	left: 0.6em;
+	top: 0.6em;
+	font-family: "Bauhaus Demi";
+	font-size: 90%;
+	text-transform: uppercase;
+	background-color: transparent;
+}
+#game-list .game-container div .content {
+	position: absolute;
+	top: 1.44em;
+	text-align: center;
+	font-size: 125%;
+	font-weight: 500;	
+	width: 100%;
+	background-color: transparent;	
+}
+#game-list .game-container .game-name .content {
+	left: 0.9em;
+	top: 1.8em;
+	font-size: 160%;
+	text-align: left;
+	width: 80%;
+}
+#game-list .game-container .game-link {
+	position: absolute;
+	background-color: transparent;
+	top: 2.5em;
+	left: 57em;
+	width: 7.5em;
+}
+#game-list .game-container .game-manage {
+	left: 65.5em;
+}
+#game-list .game-container .game-present {
+	left: 74em;
+}
+#game-list .game-container .game-link img {
+	width: 7.5em;
+}
+table th {
+	width: 15em;
+	text-align: left;
+}
+
+
+/* MANAGE GAME */
+#manage .group-container {
+	width: 30em;
+	position: relative;
+	float: right;
+}
+#manage .group-container .group {
+	display: inline-block;
+	font-size: 200%;
+	background-color: #cc4200;
+	line-height: 2em;
+	padding: 0 1em;
+	cursor: pointer;
+}
+#manage .group-container .group.selected {
+	background-color: #ff8a5a;
+}	
+
+#manage .chips-container {
+	width: 20em;
+	position: relative;
+	float: left;
+}
+#manage .chips {
+	display: none;
+	font-size: 200%;
+	background-color: #ff4200;
+	line-height: 2em;
+	padding: 0 1em;
+}
+#manage .chips.selected {
+	display: block;
+}
+
+#manage .area-container {
+	display: none;
+}
+#manage .area-container.selected {
+	display: block;
+}
+#manage .area-container .flip { 
+	position: relative;
+	display: inline-block;
+	width: 29.5em;
+	height: 25.56em;
+	margin: 1.5em 0.8em;
+	cursor: pointer;
+}
+#manage .area-container .area, #manage .area-container .area-front {
+	position: relative;
+	display: inline-block;
+	width: 29.5em;
+	height: 25.56em;
+	background-size: 100% 100%;	
+}
+#manage .area-container .area .focus {
+	position: absolute;
+	background-color: #435a6b;
+	width: 3.73em;
+	height: 3.73em;
+	border-radius: 10em;
+	text-align: center;
+	line-height: 3.73em;
+	cursor: pointer;
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;	
+}
+#manage .area-container .area .focus-1 {
+	left: 7.84em;
+	top: 1.7em;
+}
+#manage .area-container .area .focus-2 {
+	left: 11.61em;
+	top: 6.3em;
+}
+#manage .area-container .area .focus-3 {
+	left: 15.39em;
+	top: 10.92em;
+}
+#manage .area-container .area .focus-4 {
+	left: 11.61em;
+	top: 15.53em;
+}
+#manage .area-container .area .focus-5 {
+	left: 7.84em;
+	top: 20.14em;
+}
+#manage .area-container .area .focus.one-chip {
+	background-color: #6c889e;
+}
+#manage .area-container .area .focus.two-chips {
+	background-color: #9ed0ef;	
+}
