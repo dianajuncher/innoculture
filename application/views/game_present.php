@@ -1,9 +1,13 @@
 <div id="presentation" class="wrapper">
 
-	<h1>Innoculture</h1>	
+	<h2>Scenario: <?=$company->name?></h2>	
 
-	<h2><?=$part?></h2>
+	<p>Presentation: intro, round 1, round 2, round 3, afslutning + wisdom of crowds</p>
 	
+	<p><a class="button" href="<?=game_leaderboard_url()?>">Leaderboard</a></p>
+	
+	
+<!--
 	<div class="pages-container">
 		<? foreach($pages as $page): ?>
 			<div class="page-wrap" id="page-<?=$page->number?>" <?=($page->number==1 ? '' : 'style="display:none;"')?>>
@@ -17,7 +21,7 @@
 			</div>
 		<? endforeach; ?>
 	</div>
-
+-->
 
 
 

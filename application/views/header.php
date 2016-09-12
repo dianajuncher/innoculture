@@ -29,7 +29,8 @@
 -->		
 		<div class="title">
 			<?=($section=='account' ? lang("page_account") : '')?>
-			<?=($section=='game_list' ? lang("page_game_list") : '')?>			
+			<?=($section=='game_list' ? lang("page_game_list") : '')?>
+			<?=($section=='leaderboard' ? lang("page_leaderboard") : '')?>	
 		</div>
 		<? if($is_loggedin): ?>
 			<div class="menu">
@@ -43,6 +44,5 @@
 			</div>
 		<? endif; ?>	
 	</nav>
-</body>
 								
  

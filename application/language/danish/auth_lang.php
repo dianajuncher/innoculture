@@ -12,6 +12,7 @@ $lang["auth_loggedin"]	= "Du er allerede logget ind.";
 $lang["page_game_list"] 	= "Mine spil";
 $lang["page_account"] 		= "Profil";	
 $lang["page_game_create"] 	= "Opret nyt spil";
+$lang["page_leaderboard"]	= "Leaderboard";
 
 
 // List of games

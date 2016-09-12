@@ -1,6 +1,11 @@
+html {
+	height: 100%;
+}
 body {
+	position: relative;
 	margin: 0;
 	padding: 0;
+	min-height: 100%;
 	font-family: "Bauhaus", "Arial", sans-serif;
 	font-size: 1vw;
 	color: white;
@@ -120,8 +125,9 @@ nav .menu .menu-dropdown a {
 
 /* FOOTER */
 .cgl-logo {
-	width: 100%;
+	position: absolute;
 	bottom: 3em;
+	width: 100%;
 	text-align: center;
 }
 .cgl-logo img {
@@ -212,13 +218,13 @@ table th {
 }
 
 
-/* MANAGE GAME */
-#manage .group-container {
+/* PLACE CHIPS */
+#chips .group-container, #woc .group-container {
 	width: 30em;
 	position: relative;
 	float: right;
 }
-#manage .group-container .group {
+#chips .group-container .group, #woc .group-container .group {
 	display: inline-block;
 	font-size: 200%;
 	background-color: #cc4200;
@@ -226,33 +232,33 @@ table th {
 	padding: 0 1em;
 	cursor: pointer;
 }
-#manage .group-container .group.selected {
+#chips .group-container .group.selected, #woc .group-container .group.selected {
 	background-color: #ff8a5a;
 }	
 
-#manage .chips-container {
+#chips .chips-container {
 	width: 20em;
 	position: relative;
 	float: left;
 }
-#manage .chips {
+#chips .chips {
 	display: none;
 	font-size: 200%;
 	background-color: #ff4200;
 	line-height: 2em;
 	padding: 0 1em;
 }
-#manage .chips.selected {
+#chips .chips.selected {
 	display: block;
 }
 
-#manage .area-container {
+#chips .area-container, #woc .area-container {
 	display: none;
 }
-#manage .area-container.selected {
+#chips .area-container.selected, #woc .area-container.selected {
 	display: block;
 }
-#manage .area-container .flip { 
+#chips .area-container .flip, #woc .area-container .flip { 
 	position: relative;
 	display: inline-block;
 	width: 29.5em;
@@ -260,14 +266,33 @@ table th {
 	margin: 1.5em 0.8em;
 	cursor: pointer;
 }
-#manage .area-container .area, #manage .area-container .area-front {
+#chips .area-container .area-back, #chips .area-container .area-front, #woc .area-container .area-back, #woc .area-container .area-front {
 	position: relative;
 	display: inline-block;
 	width: 29.5em;
 	height: 25.56em;
 	background-size: 100% 100%;	
 }
-#manage .area-container .area .focus {
+#woc .area-container .area-front .area {
+	position: absolute;
+	top: 10.28em;
+	left: 12.25em;
+	background-color: #435a6b;
+	width: 5em;
+	height: 5em;
+	border-radius: 10em;
+	text-align: center;
+	line-height: 5em;
+	cursor: pointer;
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;		
+}
+#woc .area-container .area-front .area span {
+	font-size: 150%;
+}
+#chips .area-container .area-back .focus, #woc .area-container .area-back .focus {
 	position: absolute;
 	background-color: #435a6b;
 	width: 3.73em;
@@ -281,29 +306,88 @@ table th {
 	-ms-user-select: none;      
 	user-select: none;	
 }
-#manage .area-container .area .focus-1 {
+#chips .area-container .area-back .focus span, #woc .area-container .area-back .focus span {
+	font-size: 100%;
+}
+#chips .area-container .area-back .focus-1, #woc .area-container .area-back .focus-1 {
 	left: 7.84em;
 	top: 1.7em;
 }
-#manage .area-container .area .focus-2 {
+#chips .area-container .area-back .focus-2, #woc .area-container .area-back .focus-2 {
 	left: 11.61em;
 	top: 6.3em;
 }
-#manage .area-container .area .focus-3 {
+#chips .area-container .area-back .focus-3, #woc .area-container .area-back .focus-3 {
 	left: 15.39em;
 	top: 10.92em;
 }
-#manage .area-container .area .focus-4 {
+#chips .area-container .area-back .focus-4, #woc .area-container .area-back .focus-4 {
 	left: 11.61em;
 	top: 15.53em;
 }
-#manage .area-container .area .focus-5 {
+#chips .area-container .area-back .focus-5, #woc .area-container .area-back .focus-5 {
 	left: 7.84em;
 	top: 20.14em;
 }
-#manage .area-container .area .focus.one-chip {
+#chips .area-container .area-back .focus.one-chip {
 	background-color: #6c889e;
 }
-#manage .area-container .area .focus.two-chips {
+#chips .area-container .area-back .focus.two-chips {
 	background-color: #9ed0ef;	
+}
+
+
+/* LEADERBOARD */
+#leaderboard .leaderboard-container {
+	position: relative;
+	margin: 5.5em 9.5em;
+}
+#leaderboard .group-container {
+	position: relative;
+	margin: 0.7em 0em;
+	height: 4em;
+}
+#leaderboard .group-container .group-number {
+	position: absolute;
+	left: 0em;
+	top: 0em;
+	width: 4em;
+	height: 4em;
+	background-color: #ff8a5a;
+	color: white;
+	line-height: 4em;
+	text-align: center;
+}
+#leaderboard .group-container .group-number span {
+	font-size: 150%;
+}
+#leaderboard .group-container .score-bar-container {
+	position: absolute;
+	left: 5.4em;
+	top: 0.7em;
+	height: 2.6em;
+	width: 70em;
+	background-color: rgba(96,134,150,0.2);
+}
+#leaderboard .group-container .score-bar-container .score-bar {
+	position: absolute;
+	left: 0em;
+	top: 0em;
+	height: 2.6em;
+	width: 0;
+	background-color: #608696;
+}
+#leaderboard .group-container .group-score {
+	position: absolute;
+	top: 0em;
+	right: 0em;
+	width: 4em;
+	height: 4em;
+	background-color: #608696;
+	color: white;
+	line-height: 4em;
+	text-align: center;
+}
+#leaderboard .group-container .group-score span {
+	font-size: 150%;
 }

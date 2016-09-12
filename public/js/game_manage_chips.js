@@ -1,7 +1,9 @@
 $(function(){
 
-	var game_id = $("#manage").data("game-id");	
-	var round = $("#manage").data("round");
+	var game_id = $("#chips").data("game-id");	
+	var round = $("#chips").data("round");
+	var longclick = 750;
+	var start;
 	var is_closed = false;
 	var max_areas = round*2;
 	
@@ -26,7 +28,7 @@ $(function(){
 	$(".flipped, .locked").each(function(index,element) {
 		$(element).flip(true);
 	});
-	$(".flip").on('click',function(event) {
+	$(".flip").on('mouseup touchend',function(event) {
 		var flipped = $(this).siblings(".flipped").length;
 		if($(this).hasClass("flipped")) {
 			var chips = parseInt($(this).find("span").text());
@@ -44,23 +46,25 @@ $(function(){
 		}
 	});
 
-	$(".focus").click(function(event) {
+	$(".focus").on('mousedown',function(event) {
 		event.stopPropagation();
+		start = new Date().getTime();
+	});
+	$(".focus").on('mouseup touchend',function(event) {
+		event.stopPropagation();	
 		var group_number = $(this).data("group-number");
 		var area_id = $(this).data("area-id");	
 		var focus_id = $(this).data("focus-id");
 		var chips = parseInt($(this).children("span").text());
 		var free_chips = parseInt($(".chips-"+group_number).children("span").text());
-		
 		var $focus = $(this);
 
-		if(chips == 2 || free_chips==0) {
-			$.post(siteurl + 'ajax/remove_chips',
+		if(chips == 2 || free_chips==0 || (new Date().getTime() >= (start+longclick)) ) {
+			$.post(siteurl + 'ajax/remove_all_chips',
 			 	{
 			 		"game_id": game_id,
 			 		"group_number": group_number,
 			 		"focus_id": focus_id,
-			 		"chips": 2
 			 	},
 			 	function(data) {
 			 		if(data.status=="ok") {

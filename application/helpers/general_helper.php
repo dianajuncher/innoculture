@@ -7,6 +7,13 @@
         $CI->load->view('footer', $data);
     }
 	
+	function wrap_tablet_view($page, $data=NULL) {
+        $CI =& get_instance();
+        $CI->load->view('header_tablet', $data);
+        $CI->load->view($page, $data );
+        $CI->load->view('footer_tablet', $data);
+	}
+	
 	function add_js_file($file) {
 		$CI =& get_instance();
 		$js_files = $CI->config->item('default_js');

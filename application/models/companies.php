@@ -8,6 +8,11 @@ class Companies extends CI_Model
 		parent::__construct();
 	}
 
+	function get_company($company_id) {
+		$this->db->where('id',$company_id);
+		$this->db->from('companies');
+		return $this->db->get()->row();
+	}
 	function get_company_name($company_id) {
 		$this->db->where('id',$company_id);
 		$this->db->from('companies');

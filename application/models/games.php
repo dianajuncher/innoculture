@@ -73,19 +73,23 @@ class Games extends CI_Model
 	
 	
 /* GROUPS, CHIPS, POINTS */
-	function get_groups_of_game($game_id) {
+	function get_groups_of_game($game_id,$woc=0) {
 		$this->db->where('game_id',$game_id);
 		$this->db->from('games_groups');
 		$groups = $this->db->get()->result();
 
 		foreach($groups as $group) {
-		 	$group->free_chips = $this->count_chips_of_group($game_id,$group->number,'free');
+			if($woc==0) {
+				$group->free_chips = $this->count_free_chips_of_group($game_id,$group->number);
+			}
 			$group->areas = $this->gameboard->get_areas();
 			foreach($group->areas as $area) {
-				$area->chips = $this->count_chips_of_group_in_area($game_id,$group->number,$area->id);
-				$area->round = $this->get_areas_of_group($game_id,$group->number,$area->id);
+				$area->chips = $this->count_chips_of_group_in_area($game_id,$group->number,$area->id,$woc);
+				if($woc==0) {
+					$area->round = $this->get_areas_of_group($game_id,$group->number,$area->id);
+				}
 				foreach($area->focuses as $focus) {
-					$focus->chips = $this->count_chips_of_group_in_focus($game_id,$group->number,$focus->id);
+					$focus->chips = $this->count_chips_of_group_in_focus($game_id,$group->number,$focus->id,$woc);
 				}
 			}
 		}
@@ -99,26 +103,24 @@ class Games extends CI_Model
 	function get_chips_of_group($game_id,$group_number) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);
+		$this->db->where('woc',0);
 		$this->db->from('games_groups_chips');
 		return $this->db->get()->result();
 	}
-	function count_chips_of_group($game_id,$group_number,$select=NULL) {
+	function count_free_chips_of_group($game_id,$group_number) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);
-		if($select=='placed') {
-			$this->db->where('area_id IS NOT NULL');
-			$this->db->where('focus_id IS NOT NULL');
-		} elseif($select=='free') {
-			$this->db->where('area_id IS NULL');
-			$this->db->where('focus_id IS NULL');
-		}
+		$this->db->where('woc',0);		
+		$this->db->where('area_id IS NULL');
+		$this->db->where('focus_id IS NULL');
 		$this->db->from('games_groups_chips');
 		return $this->db->count_all_results();;
 	}
-	function count_chips_of_group_in_area($game_id,$group_number,$area_id) {
+	function count_chips_of_group_in_area($game_id,$group_number,$area_id,$woc) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);
 		$this->db->where('area_id',$area_id);
+		$this->db->where('woc',$woc);			
 		$this->db->from('games_groups_chips');
 		return $this->db->count_all_results();				
 	}
@@ -134,10 +136,11 @@ class Games extends CI_Model
 			return $result->round;
 		}
 	}
-	function count_chips_of_group_in_focus($game_id,$group_number,$focus_id) {
+	function count_chips_of_group_in_focus($game_id,$group_number,$focus_id,$woc) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);
 		$this->db->where('focus_id',$focus_id);
+		$this->db->where('woc',$woc);			
 		$this->db->from('games_groups_chips');
 		return $this->db->count_all_results();
 	}
@@ -146,14 +149,28 @@ class Games extends CI_Model
 		$this->db->where('group_number',$group_number);
 		$this->db->where('area_id IS NULL');
 		$this->db->where('focus_id IS NULL');
+		$this->db->where('woc',0);
 		$this->db->limit(1);
 		$this->db->update('games_groups_chips',$chip);
 	}	
-	function remove_chips($game_id,$group_number,$focus_id,$free_chip) {
+	function remove_all_chips($game_id,$group_number,$focus_id,$free_chip) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);
 		$this->db->where('focus_id',$focus_id);
+		$this->db->where('woc',0);
 		$this->db->update('games_groups_chips',$free_chip);
+	}
+	function place_chip_woc($chip) {
+		$this->db->insert('games_groups_chips',$chip);
+	}
+	function remove_chip_woc($game_id,$group_number,$area_id,$focus_id) {
+		$this->db->where('game_id',$game_id);
+		$this->db->where('group_number', $group_number);
+		$this->db->where('area_id',$area_id);
+		$this->db->where('focus_id',$focus_id);
+		$this->db->where('woc',1);
+		$this->db->limit(1);		
+		$this->db->delete('games_groups_chips');
 	}
 	
 	// POINTS
@@ -227,5 +244,19 @@ class Games extends CI_Model
 		);
 		$this->db->where('id',$game_id);
 		$this->db->update('games',$data);
+	}
+	
+	function get_points_of_groups($game_id) {
+		$this->db->where('game_id',$game_id);
+		$this->db->order_by('number','asc');
+		$this->db->from('games_groups');
+		return $this->db->get()->result();
+	}
+	function get_max_points_of_groups($game_id) {
+		$this->db->where('game_id',$game_id);
+		$this->db->order_by('points','desc');
+		$this->db->from('games_groups');
+		$group = $this->db->get()->row();
+		return $group->points;
 	}
 }

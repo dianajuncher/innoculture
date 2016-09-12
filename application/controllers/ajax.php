@@ -18,6 +18,14 @@ class Ajax extends CI_Controller
             redirect(login_url());
         }
     }
+	
+	function select_game()
+	{
+		$game_id = $this->input->post('game_id');
+		$this->session->set_userdata('game_id',$game_id);
+		$response = array('status'=>'ok');
+		echo json_encode($response);
+	}
     
 	function place_chip()
 	{
@@ -27,13 +35,13 @@ class Ajax extends CI_Controller
 		$focus_id = $this->input->post('focus_id');
 		$chip = array(
 			'area_id' => $area_id,
-			'focus_id' => $focus_id
+			'focus_id' => $focus_id,
 		);
 		$this->games->place_chip($game_id,$group_number,$chip);
 		$response = array('status'=>'ok');
 		echo json_encode($response);
 	}
-	function remove_chips()
+	function remove_all_chips()
 	{
 		$game_id = $this->input->post('game_id');
 		$group_number = $this->input->post('group_number');
@@ -42,9 +50,36 @@ class Ajax extends CI_Controller
 			'area_id' => NULL,
 			'focus_id' => NULL
 		);
-		$this->games->remove_chips($game_id,$group_number,$focus_id,$free_chip);
+		$this->games->remove_all_chips($game_id,$group_number,$focus_id,$free_chip);
 		$response = array('status'=>'ok');
 		echo json_encode($response);
+	}
+	
+	function place_chip_woc() {
+		$game_id = $this->input->post('game_id');
+		$group_number = $this->input->post('group_number');
+		$area_id = $this->input->post('area_id');
+		$focus_id = $this->input->post('focus_id');
+		$chip = array(
+			'game_id' => $game_id,
+			'group_number' => $group_number,
+			'round' => 4,
+			'area_id' => $area_id,
+			'focus_id' => $focus_id,
+			'woc' => 1
+		);
+		$this->games->place_chip_woc($chip);
+		$response = array('status'=>'ok');
+		echo json_encode($response);
+	}
+	function remove_chip_woc() {
+		$game_id = $this->input->post('game_id');
+		$group_number = $this->input->post('group_number');
+		$area_id = $this->input->post('area_id');
+		$focus_id = $this->input->post('focus_id');
+		$this->games->remove_chip_woc($game_id,$group_number,$area_id,$focus_id);
+		$response = array('status'=>'ok');
+		echo json_encode($response);		
 	}
 	
 	function calculate_points()

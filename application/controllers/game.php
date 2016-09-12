@@ -39,7 +39,7 @@ class Game extends CI_Controller {
 			$data['section'] = 'account';
 			wrap_page_view('account',$data);
 		} else {
-			redirect(login_url());
+			redirect(home_url());
 		}
 	}
 	
@@ -50,9 +50,8 @@ class Game extends CI_Controller {
 			$data['section'] = 'game_list';			
 			$data['games'] = $this->games->get_games_of_user($data['userid']);
 			wrap_page_view('game_list',$data);
-			
 		} else {
-			redirect(login_url());			
+			redirect(home_url());
 		}
 	}
 	
@@ -75,7 +74,7 @@ class Game extends CI_Controller {
 				wrap_page_view('game_create',$data);
 			}
 		} else {
-			redirect(login_url());			
+			redirect(home_url());	
 		}		
 	}
 
@@ -86,68 +85,92 @@ class Game extends CI_Controller {
 			$this->games->delete_game($game_id);
 			redirect(game_list_url());
 		} else {
-			redirect(login_url());			
-		}		
+			redirect(home_url());
+		}
 	}
-		
-	public function game($game_id)
-	{
+	
+	public function game_start($game_id) {
 		$data = $this->data;
 		if($data['is_loggedin']) {
-			if( isset($_POST['start_game']) ) {
-				$this->games->start_game($this->input->post('start_game'));
-				$this->session->set_userdata('started',1);
-			}
-			$data['game'] = $this->games->get_game_by_id($game_id);
-			$this->session->set_userdata('game_id',$game_id);	
-			$data['section'] = 'game';					
-			wrap_page_view('game',$data);
+			$this->games->start_game($game_id);
+			redirect(game_list_url());
 		} else {
-			redirect(login_url());			
-		}		
+			redirect(home_url());
+		}
+		
 	}
-	
+			
 	public function game_resources($company_id) {
 		$data = $this->data;
-		
-		
-	}
-	public function game_present($part) {
-		$data = $this->data;
-
-		$game_obj = $this->games->get_game_by_id($data['game_id']);
-		if($game_obj->finished == 0) {
-			$data['game'] = $game_obj;
-			$data['part'] = $part;
-			$data['pages'] = $this->companies->get_pages_of_part($game_obj->company_id,$part);	
-			wrap_page_view('game_present',$data);
+		if($data['is_loggedin']) {
+			$data['company'] = $this->companies->get_company($company_id);
+			// $data['resources'] = $this->companies->get_company_resources($company_id);
+			wrap_page_view('game_resources',$data);
 		} else {
-			redirect(game_list_url());
+			redirect(home_url());
 		}
 	}
-	
+
 	public function game_manage($section=NULL,$part=NULL) {
 		$data = $this->data;		
-		
-		$game_obj = $this->games->get_game_by_id($data['game_id']);
-		if($game_obj->finished == 0) {
-			$data['section'] = $section;
-			$data['game'] = $game_obj;
-			if($section == 'points') {
+		if($data['is_loggedin']) {
+			$game_obj = $this->games->get_game_by_id($data['game_id']);
+			$data['game'] = $game_obj;			
+			if($section=='chips' && $part!=NULL) {
+				$data['section'] = $section;
 				$data['round'] = $part;
 				$data['groups'] = $this->games->get_groups_of_game($game_obj->id);
-			} elseif($section == 'keywords') {
+				add_js_file('game_manage_chips.js');
+				wrap_tablet_view('game_manage_chips',$data);
+			} elseif($section=='keywords' && $part!=NULL) {
+				$data['section'] = $section;
 				$data['part'] = $part;
+				wrap_tablet_view('game_manage_keywords',$data);
+			} elseif($section=='woc') {
+				$data['section'] = $section;
+				$data['groups'] = $this->games->get_groups_of_game($game_obj->id,$woc=1);
+				add_js_file('game_manage_woc.js');
+				wrap_tablet_view('game_manage_woc',$data);
 			} else {
-				$data['section'] = 'default';
+				$data['section'] = 'overview';
+				wrap_tablet_view('game_manage',$data);
 			}
-			add_js_file('game_manage.js');
-			wrap_page_view('game_manage',$data);
 		} else {
-			redirect(game_list_url());
+			redirect(home_url());			
 		}
 	}
 	
+	public function game_present($part) {
+		$data = $this->data;
+		if($data['is_loggedin']) {
+			$game_obj = $this->games->get_game_by_id($data['game_id']);
+			if($game_obj->finished == 0) {
+				$data['game'] = $game_obj;
+				$data['company'] = $this->companies->get_company($game_obj->company_id);
+				$data['part'] = $part;
+				$data['pages'] = $this->companies->get_pages_of_part($game_obj->company_id,$part);
+				$data['section'] = 'present';
+				wrap_page_view('game_present',$data);
+			} else {
+				redirect(game_list_url());
+			}
+		} else {
+			redirect(home_url());
+		}
+	}
 	
+	public function game_leaderboard() {
+		$data = $this->data;
+		if($data['is_loggedin']) {
+			$data['game'] = $this->games->get_game_by_id($data['game_id']);
+			$data['groups'] = $this->games->get_points_of_groups($data['game']->id);
+			$data['max_points'] = $this->games->get_max_points_of_groups($data['game']->id);
+			$data['section'] = 'leaderboard';
+			add_js_file('game_leaderboard.js');
+			wrap_page_view('game_leaderboard',$data);
+		} else {
+			redirect(home_url());
+		}
+	}
 
 }
