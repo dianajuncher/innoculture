@@ -52,8 +52,12 @@
 		return base_url('game_manage/woc');
 	}
 	
-	function game_present_url($page) {
-		return base_url('game_present/'.$page);
+	function game_present_url($page=NULL) {
+		if($page) {
+			return base_url('game_present/'.$page);
+		} else {
+			return base_url('game_present');	
+		}
 	}
 	
 	function game_leaderboard_url() {

@@ -6,7 +6,7 @@ body {
 	margin: 0;
 	padding: 0;
 	min-height: 100%;
-	font-family: "Bauhaus", "Arial", sans-serif;
+	font-family: "Arial", sans-serif;
 	font-size: 1vw;
 	color: white;
 	background-color: #49545a;
@@ -89,7 +89,7 @@ nav .menu {
 	right: 0;
 	font-size: 100%;	
 	line-height: 1.2em;
-	width: 10em;;
+	width: 10em;
 	text-align: right;
 	cursor: pointer;
 }
@@ -121,6 +121,7 @@ nav .menu .menu-dropdown a {
 /* WRAPPER */
 .wrapper {
 	position: relative;
+	padding-bottom: 6em;
 }
 
 /* FOOTER */
@@ -134,7 +135,7 @@ nav .menu .menu-dropdown a {
 	width: 9em;
 }
 
-/* GAME SESSIONS */
+/* GAME LIST */
 #game-list .game-container {
 	position: relative;
 	margin: 2em 0;
@@ -211,6 +212,14 @@ nav .menu .menu-dropdown a {
 }
 #game-list .game-container .game-link img {
 	width: 7.5em;
+}
+#game-list .game-container .game-link input.game-select {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	border-style: none;
+	width: 7.5em;
+	height: 7.5em;
 }
 table th {
 	width: 15em;

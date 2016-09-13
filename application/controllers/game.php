@@ -112,8 +112,16 @@ class Game extends CI_Controller {
 	}
 
 	public function game_manage($section=NULL,$part=NULL) {
-		$data = $this->data;		
+		$data = $this->data;
 		if($data['is_loggedin']) {
+			if(isset($_POST['game-id'])) {
+				$game_id = $this->input->post('game-id');	
+				$this->session->set_userdata('game_id',$game_id);
+				$data['game_id'] = $game_id;
+			} else if ($data['game_id'] == 0) {
+				redirect(game_list_url());
+			}
+			
 			$game_obj = $this->games->get_game_by_id($data['game_id']);
 			$data['game'] = $game_obj;			
 			if($section=='chips' && $part!=NULL) {
@@ -140,15 +148,24 @@ class Game extends CI_Controller {
 		}
 	}
 	
-	public function game_present($part) {
+	public function game_present($part=null) {
 		$data = $this->data;
 		if($data['is_loggedin']) {
+			if(isset($_POST['game-id'])) {
+				$game_id = $this->input->post('game-id');	
+				$this->session->set_userdata('game_id',$game_id);
+				$data['game_id'] = $game_id;
+			} else if ($data['game_id'] == 0) {
+				redirect(game_list_url());
+			}
 			$game_obj = $this->games->get_game_by_id($data['game_id']);
 			if($game_obj->finished == 0) {
 				$data['game'] = $game_obj;
 				$data['company'] = $this->companies->get_company($game_obj->company_id);
-				$data['part'] = $part;
-				$data['pages'] = $this->companies->get_pages_of_part($game_obj->company_id,$part);
+				if($part) {
+					$data['part'] = $part;
+					$data['pages'] = $this->companies->get_pages_of_part($game_obj->company_id,$part);
+				}
 				$data['section'] = 'present';
 				wrap_page_view('game_present',$data);
 			} else {

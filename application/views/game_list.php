@@ -38,10 +38,16 @@
 				<a href="<?=game_resources_url($game->company_id)?>"><img src="<?=base_url()?>public/images/game_resources.png"/></a>
 			</div>
 			<div class="game-link game-manage">
-				<a class="game-select" href="<?=game_manage_url()?>" data-game-id="<?=$game->id?>"><img src="<?=base_url()?>public/images/game_manage.png"/></a>
+				<form method="post" action="<?=game_manage_url()?>">
+					<input type="hidden" name="game-id" value="<?=$game->id?>" />
+					<input class="game-select" type="image" src="<?=base_url()?>public/images/game_manage.png" />
+				</form>
 			</div>
 			<div class="game-link game-present">
-				<a class="game-select" href="<?=game_present_url(1)?>" data-game-id="<?=$game->id?>"><img src="<?=base_url()?>public/images/game_present.png"/></a>
+				<form method="post" action="<?=game_present_url()?>">
+					<input type="hidden" name="game-id" value="<?=$game->id?>" />
+					<input class="game-select" type="image" src="<?=base_url()?>public/images/game_present.png" />
+				</form>				
 			</div>
 		</div>
 	<? endforeach;?>	

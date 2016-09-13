@@ -65,5 +65,6 @@ $route['game_resources/(:any)'] = 			'game/game_resources/$1';
 $route['game_manage'] =						'game/game_manage';
 $route['game_manage/(:any)'] =				'game/game_manage/$1';
 $route['game_manage/(:any)/(:any)'] =		'game/game_manage/$1/$2';
+$route['game_present'] =					'game/game_present';
 $route['game_present/(:any)'] =				'game/game_present/$1';
 $route['game_leaderboard'] =				'game/game_leaderboard';
