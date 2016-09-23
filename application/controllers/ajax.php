@@ -86,27 +86,44 @@ class Ajax extends CI_Controller
 	{
 		$game_id = $this->input->post('game_id');
 		$round = $this->input->post('round');
-
 		$game = $this->games->get_game_by_id($game_id);
-
 		$points_of_focuses = $this->companies->get_points_of_round($game->company_id,$round);  // array of focus_id => points
 		$number_of_groups = $this->games->count_groups_of_game($game_id);
 
 		for($i=1;$i<=$number_of_groups;$i++) {
-		 	$points = 0;
+			$points_total = 0;
 		 	$chips = $this->games->get_chips_of_group($game_id,$i);
 		 	foreach($chips as $chip) {
 		 		if($chip->focus_id) {
-		 			$points = $points + $points_of_focuses[$chip->focus_id];
+		 			$points = $points_of_focuses[$chip->focus_id];
+					$points_total = $points_total + $points;
+					$this->games->update_chip_points($game_id,$i,$chip->focus_id,$points);
 		 		}
 		 	}
-		 	$this->games->save_points_of_group($game_id,$i,$points);
+		 	$this->games->save_points_of_group($game_id,$i,$points_total);
 			$this->games->update_areas_of_group($game_id,$i,$round);
 		}
-		$this->games->close_round($game_id,$round);
-		if($round<3) $this->games->open_round($game_id,$round+1);
+//		$this->games->close_round($game_id,$round);
+//		if($round<3) $this->games->open_round($game_id,$round+1);
 		
 		$response = array('status'=>'ok');
+		echo json_encode($response);
+	}
+	
+	function get_points_of_groups_in_area() {
+		$game_id = $this->input->post('game_id');
+		$area_id = $this->input->post('area_id');
+		
+		$points = $this->games->get_points_of_groups_in_area($game_id,$area_id);
+		$number_of_groups = $this->games->count_groups_of_game($game_id);
+		$group_points = array_fill(1,$number_of_groups,0);
+		foreach($points as $point) {
+			$group_points[$point->group_number] = $point->total;
+		}
+		$response = array(
+			'status'=>'ok',
+			'points' => $group_points
+		);
 		echo json_encode($response);
 	}
     

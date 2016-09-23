@@ -230,24 +230,28 @@ table th {
 /* PLACE CHIPS */
 #chips .group-container, #woc .group-container {
 	width: 30em;
-	position: relative;
-	float: right;
+	position: absolute;
+	top: 3.9em;
+	right: 3.9em;
+	text-align: right;
 }
 #chips .group-container .group, #woc .group-container .group {
 	display: inline-block;
-	font-size: 200%;
-	background-color: #cc4200;
-	line-height: 2em;
-	padding: 0 1em;
+	font-size: 150%;
+	background-color: rgba(255,137,88,0.2);
+	line-height: 2.5em;
+	width: 2.5em;
+	margin: 0 0.3em;
+	text-align: center;
 	cursor: pointer;
 }
 #chips .group-container .group.selected, #woc .group-container .group.selected {
-	background-color: #ff8a5a;
+	background-color: #ff8958;
 }	
 
 #chips .chips-container {
 	width: 20em;
-	position: relative;
+	position: absolute;
 	float: left;
 }
 #chips .chips {
@@ -262,7 +266,9 @@ table th {
 }
 
 #chips .area-container, #woc .area-container {
+	position: absolute;
 	display: none;
+	top: 11.4em;
 }
 #chips .area-container.selected, #woc .area-container.selected {
 	display: block;
@@ -270,22 +276,22 @@ table th {
 #chips .area-container .flip, #woc .area-container .flip { 
 	position: relative;
 	display: inline-block;
-	width: 29.5em;
-	height: 25.56em;
-	margin: 1.5em 0.8em;
+	width: 28.8em;
+	height: 24.4em;
+	margin: 1.7em;
 	cursor: pointer;
 }
 #chips .area-container .area-back, #chips .area-container .area-front, #woc .area-container .area-back, #woc .area-container .area-front {
 	position: relative;
 	display: inline-block;
-	width: 29.5em;
-	height: 25.56em;
+	width: 28.8em;
+	height: 24.4em;
 	background-size: 100% 100%;	
 }
 #woc .area-container .area-front .area {
 	position: absolute;
-	top: 10.28em;
-	left: 12.25em;
+	top: 10.04em;
+	left: 11.96em;
 	background-color: #435a6b;
 	width: 5em;
 	height: 5em;
@@ -304,11 +310,11 @@ table th {
 #chips .area-container .area-back .focus, #woc .area-container .area-back .focus {
 	position: absolute;
 	background-color: #435a6b;
-	width: 3.73em;
-	height: 3.73em;
+	width: 3.64em;
+	height: 3.64em;
 	border-radius: 10em;
 	text-align: center;
-	line-height: 3.73em;
+	line-height: 3.64em;
 	cursor: pointer;
 	-webkit-user-select: none;  
 	-moz-user-select: none;    
@@ -319,24 +325,24 @@ table th {
 	font-size: 100%;
 }
 #chips .area-container .area-back .focus-1, #woc .area-container .area-back .focus-1 {
-	left: 7.84em;
+	left: 7.65em;
 	top: 1.7em;
 }
 #chips .area-container .area-back .focus-2, #woc .area-container .area-back .focus-2 {
-	left: 11.61em;
-	top: 6.3em;
+	left: 11.33em;
+	top: 6.15em;
 }
 #chips .area-container .area-back .focus-3, #woc .area-container .area-back .focus-3 {
-	left: 15.39em;
-	top: 10.92em;
+	left: 15.02em;
+	top: 10.66em;
 }
 #chips .area-container .area-back .focus-4, #woc .area-container .area-back .focus-4 {
-	left: 11.61em;
-	top: 15.53em;
+	left: 11.33em;
+	top: 15.16em;
 }
 #chips .area-container .area-back .focus-5, #woc .area-container .area-back .focus-5 {
-	left: 7.84em;
-	top: 20.14em;
+	left: 7.65em;
+	top: 19.66em;
 }
 #chips .area-container .area-back .focus.one-chip {
 	background-color: #6c889e;
@@ -345,6 +351,166 @@ table th {
 	background-color: #9ed0ef;	
 }
 
+/* ROUND RESULT */
+#result .result-container {
+	position: absolute;
+	top: 5.5em;
+	left: 8em;
+	width: 50em;
+}
+#result .result-container .title {
+	font-family: "Bauhaus Demi";
+	font-size: 150%;
+	text-transform: uppercase;
+}
+#result .group-container {
+	float: left;
+	width: 4em;
+	margin: 3em 1em;
+}
+#result .group-container .score-bar {
+	position: relative;
+	width: 4em;
+	margin-bottom: 1em;
+}
+#result .group-container .score-bar .point, #result .group-container .score-bar .point-show, #result .group-container .score-bar .point-done {
+	position: relative;
+	width: 4em;
+	height: 1.4em;
+	margin-top: 0.7em;
+	background-color: rgba(96,134,150,0.2);
+}
+#result .group-container .score-bar .point-show {
+    animation-name: pointShow;
+    animation-duration: 0.5s;
+	background-color: #9ed0ef;
+}
+@keyframes pointShow {
+    0%   {background-color: rgba(96,134,150,0.2);}
+    100% {background-color: #9ed0ef;}
+}
+#result .group-container .score-bar .point-done {
+	background-color: #9ed0ef;
+    animation-name: pointDone;
+    animation-duration: 0.5s;
+	opacity: 0.4;
+}
+@keyframes pointDone {
+    0%   {opacity: 1;}
+    100% {opacity: 0.4;}
+}
+#result .group-container .group-number {
+	width: 4em;
+	height: 4em;
+	background-color: #ff8a5a;
+	color: white;
+	line-height: 4em;
+	text-align: center;	
+}
+#result .group-container .group-number span {
+	font-size: 150%;
+}
+
+#result .gameboard-container {
+	position: absolute;
+	right: 0;
+	top: 6em;
+	width: 48em;
+}
+#result .gameboard-container .area {
+	position: absolute;
+	width: 15.5em;
+	height: 13.4em;
+	background-size: 100% 100%;
+	cursor: pointer;
+	opacity: 0.5;
+}
+#result .gameboard-container .area.open, #result .gameboard-container .area.done {
+	opacity: 1;
+}
+#result .gameboard-container .area-1 {
+	top: 0;
+	left: 14em;
+}
+#result .gameboard-container .area-2 {
+	top: 7.2em;
+	left: 26.2em;
+}
+#result .gameboard-container .area-3 {
+	top: 21.4em;
+	left: 26.2em;
+}
+#result .gameboard-container .area-4 {
+	top: 28.6em;
+	left: 14em;
+}
+#result .gameboard-container .area-5 {
+	top: 21.4em;
+	left: 1.8em;
+}
+#result .gameboard-container .area-6 {
+	top: 7.2em;
+	left: 1.8em;
+}
+#result .gameboard-container .logo {
+	position: absolute;
+	left: 16.75em;
+	top: 18.2em;
+}
+#result .gameboard-container .logo img {
+	width: 10em;
+}
+#result .gameboard-container .area .focus {
+	position: absolute;
+	background-color: #435a6b;
+	width: 1.8em;
+	height: 1.8em;
+	border-radius: 10em;
+	text-align: center;
+	line-height: 1.8em;
+	cursor: pointer;
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;	
+}
+#result .gameboard-container .area .focus span {
+	display: none;
+	font-family: "Bauhaus Demi";
+	font-size: 100%;
+	width: 1.8em;
+	height: 1.8em;
+	border-radius: 10em;
+	text-align: center;
+	line-height: 1.8em;	
+	background-color: #435a6b;
+}
+#result .gameboard-container .area .focus .one-point {
+	background-color: #6c889e;
+}
+#result .gameboard-container .area .focus .two-points {
+	background-color: #9ed0ef;	
+}
+#result .gameboard-container .area .focus-1 {
+	left: 4.2em;
+	top: 0.9em;
+}
+#result .gameboard-container .area .focus-2 {
+	left: 6.1em;
+	top: 3.3em;
+}
+#result .gameboard-container .area .focus-3 {
+	left: 8em;
+	top: 5.8em;
+}
+#result .gameboard-container .area .focus-4 {
+	left: 6.1em;
+	top: 8.1em;
+}
+#result .gameboard-container .area .focus-5 {
+	left: 4.2em;
+	top: 10.5em;
+}
 
 /* LEADERBOARD */
 #leaderboard .leaderboard-container {

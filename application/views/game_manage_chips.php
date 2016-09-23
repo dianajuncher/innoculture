@@ -5,14 +5,7 @@
 			<div class="group <?=($i==1 ? 'selected' : '')?>" data-group-number="<?=$i?>"><?=$i?></div>
 		<? endfor; ?>
 	</div>
-		
-	<div class="chips-container">
-		<? foreach($groups as $group): ?>
-			<div class="chips chips-<?=$group->number?> <?=($group->number==1 ? 'selected' : '')?>">Jetoner: <span><?=$group->free_chips?></span></div>
-		<? endforeach; ?>
-	</div>
-	<div style="clear:both"></div>
-		
+				
 	<? foreach($groups as $group): ?>
 		<div class="area-container area-container-<?=$group->number?> <?=($group->number==1 ? 'selected' : '')?>">
 			<? foreach($group->areas as $area): ?>
@@ -33,5 +26,13 @@
 			<? endforeach; ?>
 		</div>
 	<? endforeach; ?>
+	
+	<div class="chips-container">
+		<? foreach($groups as $group): ?>
+			<div class="chips chips-<?=$group->number?> <?=($group->number==1 ? 'selected' : '')?>">Jetoner: <span><?=$group->free_chips?></span></div>
+		<? endforeach; ?>
+	</div>
+	<div style="clear:both"></div>
+	
 	<div class="button calculate-points">Beregn point</div>
 </div>

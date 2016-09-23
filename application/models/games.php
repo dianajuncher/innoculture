@@ -174,6 +174,16 @@ class Games extends CI_Model
 	}
 	
 	// POINTS
+	function update_chip_points($game_id,$group_number,$focus_id,$points) {
+		$data = array(
+			'points' => $points
+		);
+		$this->db->where('game_id',$game_id);
+		$this->db->where('group_number',$group_number);
+		$this->db->where('focus_id',$focus_id);
+		$this->db->where('woc',0);
+		$this->db->update('games_groups_chips',$data);
+	}
 	function save_points_of_group($game_id,$group_number,$points) {
 		$data = array(
 			'points' => $points
@@ -182,6 +192,15 @@ class Games extends CI_Model
 		$this->db->where('number',$group_number);
 		$this->db->update('games_groups',$data);
 	}
+	function get_points_of_groups_in_area($game_id,$area_id) {
+		$this->db->select('group_number, SUM(points) as total');
+		$this->db->group_by('group_number');
+		$this->db->where('game_id',$game_id);
+		$this->db->where('area_id',$area_id);
+		$this->db->from('games_groups_chips');
+		return $this->db->get()->result();
+	}
+
 	function update_areas_of_group($game_id,$group_number,$round) {
 		$this->db->where('game_id',$game_id);
 		$this->db->where('group_number',$group_number);

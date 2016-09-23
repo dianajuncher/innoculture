@@ -47,5 +47,16 @@ class Companies extends CI_Model
 		}
 		return $points;
 	}	
+	
+	function get_points_of_focus($company_id,$focus_id,$round) {
+		$this->db->from('companies_points');
+		$this->db->where('company_id',$company_id);
+		$this->db->where('focus_id',$focus_id);
+		$points = $this->db->get()->row();
+		if($round==1) return $points->round1;
+		if($round==2) return $points->round2;
+		if($round==3) return $points->round3;
+		return 0;
+	}
 
 }

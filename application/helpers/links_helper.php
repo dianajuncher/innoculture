@@ -60,6 +60,9 @@
 		}
 	}
 	
+	function game_round_result_url() {
+		return base_url('game_round_result');
+	}
 	function game_leaderboard_url() {
 		return base_url('game_leaderboard');
 	}

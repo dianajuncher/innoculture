@@ -176,6 +176,24 @@ class Game extends CI_Controller {
 		}
 	}
 	
+	
+	public function game_round_result() {
+		$data = $this->data;
+		if($data['is_loggedin']) {
+			$game_obj = $this->games->get_game_by_id($data['game_id']);
+			$data['game'] = $game_obj;
+			$data['groups'] = $this->games->get_points_of_groups($game_obj->id);
+			$data['max_points'] = $this->games->get_max_points_of_groups($game_obj->id);
+			$data['areas'] = $this->gameboard->get_areas_with_points($game_obj->id,$game_obj->company_id,2);
+			$data['section'] = 'round_result';
+			add_js_file('jquery.animate-shadow.js');
+			add_js_file('game_round_result.js');
+			wrap_tablet_view('game_round_result',$data);
+		} else {
+			redirect(home_url());
+		}
+	}
+	
 	public function game_leaderboard() {
 		$data = $this->data;
 		if($data['is_loggedin']) {

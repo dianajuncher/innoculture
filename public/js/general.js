@@ -11,3 +11,4 @@ $(function(){
 			$(".menu-open").show();
 		}
 	});
+});

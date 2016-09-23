@@ -5,7 +5,7 @@
 	<p>Presentation: intro, round 1, round 2, round 3, afslutning + wisdom of crowds</p>
 	
 	<p><a class="button" href="<?=game_leaderboard_url()?>">Leaderboard</a></p>
-	
+	<p><a class="button" href="<?=game_round_result_url()?>">Round result</a></p>	
 	
 <!--
 	<div class="pages-container">
