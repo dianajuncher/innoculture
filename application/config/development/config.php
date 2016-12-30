@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/cphgamelab/innoculture/';
+$config['base_url'] = 'http://localhost/CGL/innoculture/';
 
 /*
 |--------------------------------------------------------------------------
@@ -519,5 +519,5 @@ $config['proxy_ips'] = '';
 |--------------------------------------------------------------------------
 */
 $config['default_css'] = array('general.css','fonts.css');
-$config['default_js'] = array('jquery.min.js','jquery.flip.min.js','general.js');
+$config['default_js'] = array('jquery.min.js','general.js');
 

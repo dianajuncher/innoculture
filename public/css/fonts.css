@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Bauhaus';
-  src: url('../fonts/bauhaus/bauhaus.ttf') format('truetype');
+  src: url('../fonts/bauhaus/Bauhaus.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,6 +8,21 @@
 @font-face {
   font-family: 'Bauhaus Demi';
   src: url('../fonts/bauhaus/bauhaus-demi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BauhausStd Demi';
+  src: url('../fonts/bauhaus/BauhausStd_Demi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Bauhaus Medium';
+  src: url('../fonts/bauhaus/Bauhaus_Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

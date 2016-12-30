@@ -1,18 +1,23 @@
 html {
 	height: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 body {
+	min-height: 100%;
 	position: relative;
 	margin: 0;
 	padding: 0;
-	min-height: 100%;
 	font-family: "Bauhaus","Arial", sans-serif;
 	font-size: 1vw;
 	color: white;
 	background-color: #49545a;
 }
+body.login {
+	height: 100%;
+}
 
 a {
+	color: rgba(255,138,90,1);
 	text-decoration: none;
 }
 
@@ -35,19 +40,73 @@ a {
 	color: white;
 }
 
-.button_small {
-	display: inline-block;
-	font-size: 100%;
-	line-height: 1.3em;
-	padding: 0 0.5em;
-	border: 0.1em solid #ccc;
-	border-radius: 0.4em;
-	color: black;
-	background-color: #eee;
-	margin: 0;
-	cursor: pointer;
+.wrapper {
+	position: relative;
+	padding-bottom: 6em;
 }
 
+/* FOOTER */
+.cgl-logo {
+	position: absolute;
+	bottom: 3em;
+	width: 100%;
+	text-align: center;
+}
+.cgl-logo img {
+	width: 9em;
+}
+
+/* LOGIN */
+#login.wrapper {
+	padding: 0;
+	height: 100%;
+	min-height: 26em;
+}
+#login .login-box {
+	position: absolute;
+	left: 41em;
+	top: 50%;
+	transform: translateY(-13em);	
+	width: 18em;
+	height: 26em;
+}
+#login .logo {
+	margin-bottom: 2.5em;
+}
+#login .logo img {
+	width: 18em;
+}
+#login form {
+	font-size: 140%;
+	width: 10em;
+	margin: auto;
+}
+#login form input {
+	font-size: 100%;
+	width: 10em;
+	height: 2em;
+	border-style: none;
+	padding: 0;
+	margin-bottom: 0.75em;
+	color: #fff;
+	background-color: rgba(242,242,242,0.3);
+	text-align: center;
+	border-radius: 0.25em;
+	text-transform: lowercase;	
+	font-family: "Bauhaus";
+	font-weight: 500;
+}
+#login form input:focus::-webkit-input-placeholder { color:transparent; }
+#login form input:focus:-moz-placeholder { color:transparent; } /* Firefox 18- */
+#login form input:focus::-moz-placeholder { color:transparent; } /* Firefox 19+ */
+#login form input:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
+#login form input[type=submit] {
+	font-family: "Bauhaus Medium";	
+	background-color: #ff9d6d;
+	text-transform: uppercase;
+	margin-top: 0.75em;	
+	cursor: pointer;
+}
 
 /* NAVIGATION */
 nav {
@@ -59,7 +118,9 @@ nav {
 	text-transform: uppercase;
 	letter-spacing: 0.1em;	
 }
-
+nav.tablet {
+	background-image: none;
+}
 nav .logo {
 	position: absolute;
 	top: 1.74em;
@@ -78,7 +139,7 @@ nav .title {
 	width: 25em;
 	left: 12.5em;
 	top: 2.3em;
-	font-family: "Bauhaus Demi";
+	font-family: "Bauhaus";
 	font-size: 200%;
 	text-align: center;
 	letter-spacing: 0.05em;		
@@ -118,25 +179,24 @@ nav .menu .menu-dropdown a {
 	color: white;
 }
 
-/* WRAPPER */
-.wrapper {
-	position: relative;
-	padding-bottom: 6em;
-}
-
-/* FOOTER */
-.cgl-logo {
+#overlay {
 	position: absolute;
-	bottom: 3em;
+	top: 0;
+	left: 0;
 	width: 100%;
-	text-align: center;
-}
-.cgl-logo img {
-	width: 9em;
+	height: 100%;
+	display: none;
+	z-index: 9;
 }
 
-/* GAME LIST */
-#game-list .game-container {
+/* ACCOUNT */
+#account.wrapper {
+	width: 20em;
+	margin: 0 auto;
+}
+
+/* HOME (GAME OVERVIEW) */
+#home .game-container {
 	position: relative;
 	margin: 2em 0;
 	left: 8em;
@@ -145,34 +205,53 @@ nav .menu .menu-dropdown a {
 	background-color: #6a7378;
 	border-radius: 0.13em;
 }
-#game-list .game-container div {
-	position: absolute;
-/*	background-color: #9b9b9b;
-	opacity: 0.73;*/
-	background-color: rgba(155,155,155,0.73);
-	border-radius: 0.13em;
+
+#home .new-game-container {
+	background-color: rgba(106,115,120,0.2);
 }
-#game-list .game-name, #game-list .game-groups, #game-list .game-scenario, #game-list .game-status, #game-list .game-created {
+#home .new-game-container div {
+	opacity: 0.4;
+}
+#home .new-game-container .new-game-button {
+	position: absolute;
+	top: 0em;
+	left: 35.125em;
+	width: 13.75em;	
+	opacity: 1;
+	cursor: pointer;
+}
+#home .new-game-container .new-game-button img {
+	width: 13.75em;
+}
+
+#home .game-name, #home .game-groups, #home .game-scenario, #home .game-status, #home .game-created, #home .game-info {
+	position: absolute;
+	background-color: rgba(145,145,145,1);
+	border-radius: 0.13em;
 	height: 4.125em;
 	width: 17em;
 }
-#game-list .game-name {
+#home .game-info {
+	height: 9.5em;
+	width: 34em;
+}
+#home .game-name {
 	left: 1.25em;
 	height: 9.5em;
 }
-#game-list .game-name, #game-list .game-groups, #game-list .game-status {
+#home .game-name, #home .game-groups, #home .game-status, #home .game-info {
 	top: 1.25em;
 }
-#game-list .game-scenario, #game-list .game-created {
+#home .game-scenario, #home .game-created {
 	top: 6.625em;
 }
-#game-list .game-groups, #game-list .game-scenario {
+#home .game-groups, #home .game-scenario {
 	left: 19.5em;
 }
-#game-list .game-status, #game-list .game-created {
+#home .game-status, #home .game-created, #home .game-info {
 	left: 37.75em;
 }
-#game-list .game-container div .title {
+#home .title {
 	position: absolute;
 	left: 0.6em;
 	top: 0.6em;
@@ -181,7 +260,8 @@ nav .menu .menu-dropdown a {
 	text-transform: uppercase;
 	background-color: transparent;
 }
-#game-list .game-container div .content {
+
+#home .content, #home .content-input {
 	position: absolute;
 	top: 1.44em;
 	text-align: center;
@@ -190,30 +270,72 @@ nav .menu .menu-dropdown a {
 	width: 100%;
 	background-color: transparent;	
 }
-#game-list .game-container .game-name .content {
+#home .game-name .content, #home .game-name .content-input {
 	left: 0.9em;
 	top: 1.8em;
 	font-size: 160%;
 	text-align: left;
 	width: 80%;
 }
-#game-list .game-container .game-link {
+#home .game-name .content textarea {
+	font-family: "Bauhaus","Arial", sans-serif;	
+	font-size: 100%;
+	width: 100%;
+	border-style: none;
+	background-color: transparent;
+	color: white;
+	resize: none;	
+	overflow: hidden;
+}
+#home textarea:focus::-webkit-input-placeholder { color:transparent; }
+#home textarea:focus:-moz-placeholder { color:transparent; } /* Firefox 18- */
+#home textarea:focus::-moz-placeholder { color:transparent; } /* Firefox 19+ */
+#home textarea:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
+
+#home .game-name .content textarea.active {
+	background-color: white;
+	color: black;
+}
+#home .drop-down-arrow {
+	position: absolute;
+	top: 0.6em;
+	right: 0.6em;
+	cursor: pointer;
+}
+#home .drop-down-arrow img {
+	width: 1em;
+}
+#home .groups-drop-down, #home .scenarios-drop-down {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	display: none;
+	background-color: rgb(145,145,145);
+	z-index: 10;
+	color: #ccc;
+	cursor: pointer;
+}
+#home .groups-drop-down div:hover, #home .scenarios-drop-down div:hover {
+	color: #fff;
+	background-color: rgb(155,155,155);
+}
+#home .game-link {
 	position: absolute;
 	background-color: transparent;
 	top: 2.5em;
 	left: 57em;
 	width: 7.5em;
 }
-#game-list .game-container .game-manage {
-	left: 65.5em;
-}
-#game-list .game-container .game-present {
-	left: 74em;
-}
-#game-list .game-container .game-link img {
+#home .game-link img {
 	width: 7.5em;
 }
-#game-list .game-container .game-link input.game-select {
+#home .game-manage {
+	left: 65.5em;
+}
+#home .game-present, #home .game-start {
+	left: 74em;
+}
+#home .game-container .game-link input.game-select {
 	font-size: 100%;
 	margin: 0;
 	padding: 0;
@@ -221,18 +343,101 @@ nav .menu .menu-dropdown a {
 	width: 7.5em;
 	height: 7.5em;
 }
-table th {
-	width: 15em;
-	text-align: left;
+#home .game-start {
+	opacity: 0.2;
+}
+#home .game-start.active {
+	cursor: pointer;	
+	opacity: 1;
 }
 
 
-/* PLACE CHIPS */
+/* PREPARATION */
+#preparation.wrapper {
+	width: 50%;
+	margin: 0 auto;
+}
+
+
+
+/* TABLET */
+#overview.wrapper {
+	margin-left: 6.5em;
+	padding: 0;
+}
+#overview .col {
+	display: inline-block;
+	width: 10.6em;
+	height: 37.2em;
+	padding: 2em;
+	background-color: #6a7378;
+	border-radius: 0.4em;
+	margin: 2em 1em;
+}
+#overview .col .title {
+	font-size: 200%;
+	line-height: 1em;
+	padding: 1em 0 0.8em 0;
+	margin-bottom: 0.85em;
+	border-radius: 0.1em;
+	text-align: center;
+	text-transform: uppercase;
+}
+#overview .col .link {
+		position: relative;
+	font-size: 175%;
+	width: 6.11em;
+	height: 6.11em;
+	border-radius: 20em;
+	margin-bottom: 0.65em;
+	text-transform: uppercase;
+	text-align: center;	
+	line-height: 1em;
+	display:table;
+	
+	
+}
+#overview .col .link a {
+	color: #fff;
+	display: table-cell;
+	vertical-align: middle;	
+}
+#overview .intro .title, #overview .intro .link, #overview .woc .title, #overview .woc .link {
+	background-color: rgba(155,155,155,0.7);
+}
+#overview .round1 .title, #overview .round1 .link {
+	background-color: rgba(96,134,150,0.7);
+}
+#overview .round2 .title, #overview .round2 .link {
+	background-color: rgba(144,213,240,0.7);
+}
+#overview .round3 .title, #overview .round3 .link {
+	background-color: rgba(255,137,88,0.7);
+}
+
+
+
+/* GAME MANAGE CHIPS / WOC */
+#chips.wrapper, #woc.wrapper {
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	height: 69em;
+	padding: 0;
+	margin: 0;
+}
+#chips .title, #woc .title {
+	font-size: 350%;
+	position: absolute;
+	top: 1.11em;
+	left: 3.14em;
+	text-transform: uppercase;
+}
 #chips .group-container, #woc .group-container {
 	width: 30em;
 	position: absolute;
 	top: 3.9em;
-	right: 3.9em;
+	right: 10em;
 	text-align: right;
 }
 #chips .group-container .group, #woc .group-container .group {
@@ -241,34 +446,18 @@ table th {
 	background-color: rgba(255,137,88,0.2);
 	line-height: 2.5em;
 	width: 2.5em;
-	margin: 0 0.3em;
+	margin-left: 1em;
 	text-align: center;
 	cursor: pointer;
 }
 #chips .group-container .group.selected, #woc .group-container .group.selected {
 	background-color: #ff8958;
 }	
-
-#chips .chips-container {
-	width: 20em;
-	position: absolute;
-	float: left;
-}
-#chips .chips {
-	display: none;
-	font-size: 200%;
-	background-color: #ff4200;
-	line-height: 2em;
-	padding: 0 1em;
-}
-#chips .chips.selected {
-	display: block;
-}
-
 #chips .area-container, #woc .area-container {
 	position: absolute;
 	display: none;
-	top: 11.4em;
+	top: 11.55em;
+	left: 3.9em;
 }
 #chips .area-container.selected, #woc .area-container.selected {
 	display: block;
@@ -276,9 +465,9 @@ table th {
 #chips .area-container .flip, #woc .area-container .flip { 
 	position: relative;
 	display: inline-block;
-	width: 28.8em;
+	width: 28.2em;
 	height: 24.4em;
-	margin: 1.7em;
+	margin: 0 3em 3em 0em;
 	cursor: pointer;
 }
 #chips .area-container .area-back, #chips .area-container .area-front, #woc .area-container .area-back, #woc .area-container .area-front {
@@ -350,8 +539,113 @@ table th {
 #chips .area-container .area-back .focus.two-chips {
 	background-color: #9ed0ef;	
 }
+#chips .free-chips {
+	position: absolute;
+	width: 17em;
+	height: 8.6em;
+	bottom: 0em;
+	left: 25.6em;
+	background-image: url('../images/chips_free.png');
+	background-size: 100% 100%;
+/*	cursor: pointer;*/
+}
+#chips .free-chips .chips {
+	display: none;
+	font-family: "Bauhaus";
+	font-size: 350%;
+	text-align: center;
+	padding-top: 0.5em;
+}
+#chips .free-chips .chips.selected {
+	display: block;
+}
+#chips .free-chips .text {
+	font-family: "Bauhaus";	
+	font-size: 130%;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 0.5em;
+	
+}
+#chips .free-chips-popup {
+	display: none;
+	position: absolute;
+	top: 30em;
+	left: 34em;
+	width: 30em;
+	height: 14em;
+	background-color: #90d5f0;
+	border-radius: 2em;
+	padding: 2em;
+	cursor: pointer;
+}
 
-/* ROUND RESULT */
+#chips .close-round, #woc .close-round {
+	width: 17em;
+	height: 8.6em;
+	position: absolute;
+	bottom: 0em;
+	left: 57.1em;
+	background-image: url('../images/chips_confirm.png');
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+#chips .close-round.closed {
+	opacity: 0.2;
+}
+#chips .close-round .icon, #woc .close-round .icon {
+	font-family: "Bauhaus";
+	font-size: 350%;
+	text-align: center;
+	padding-top: 0.5em;
+}
+#chips .close-round .text, #woc .close-round .text {
+	font-family: "Bauhaus";	
+	font-size: 130%;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 0.5em;
+}
+#chips .close-round-popup {
+	font-family: "Bauhaus";	
+	display: none;
+	position: absolute;
+	top: 30em;
+	left: 34em;
+	width: 30em;
+	min-height: 14em;
+	background-color: #ff8958;
+	border-radius: 2em;
+	padding: 2em;
+	text-align: center;
+}
+#chips .close-round-popup .header {
+	font-size: 350%;
+	color: white;
+	margin-bottom: 0.25em;
+}
+#chips .close-round-popup .chips, #chips .close-round-popup .warning {
+	font-size: 130%;
+	text-align: left;
+	margin-bottom: 1em;
+}
+#chips .close-round-popup .ok, #chips .close-round-popup .cancel {
+	display: inline-block;
+	font-size: 150%;
+	width: 6em;
+	text-align: center;
+	background-color: white;
+	color: #ff8958;
+	margin: 0.5em;
+	border-radius: 0.2em;
+	cursor: pointer;
+}
+/* GAME PRESENT */
+#present.wrapper {
+	width: 50%;
+	margin: 0 auto;
+}
+/* PRESENT ROUND RESULT */
 #result .result-container {
 	position: absolute;
 	top: 5.5em;
@@ -410,12 +704,14 @@ table th {
 #result .group-container .group-number span {
 	font-size: 150%;
 }
-
 #result .gameboard-container {
 	position: absolute;
 	right: 0;
 	top: 6em;
 	width: 48em;
+	height: 45em;
+	margin: 0;
+	border: 1px solid transparent;
 }
 #result .gameboard-container .area {
 	position: absolute;
@@ -424,6 +720,7 @@ table th {
 	background-size: 100% 100%;
 	cursor: pointer;
 	opacity: 0.5;
+	white-space: nowrap;
 }
 #result .gameboard-container .area.open, #result .gameboard-container .area.done {
 	opacity: 1;
@@ -512,6 +809,7 @@ table th {
 	top: 10.5em;
 }
 
+
 /* LEADERBOARD */
 #leaderboard .leaderboard-container {
 	position: relative;
@@ -565,4 +863,96 @@ table th {
 }
 #leaderboard .group-container .group-score span {
 	font-size: 150%;
+}
+
+/* TIMER */
+#timer .choose-time {
+	position: absolute;
+	top: 2.78em;
+	right: 2.78em;
+	width: 12.5em;
+	background-color: #6a7378;
+	border-radius: 0.3em;
+	padding: 0.6em 1.2em;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+#timer .selected-time {
+	color: #ccc;
+}
+#timer .selected-time.selected {
+	color: #fff;
+}
+#timer .drop-down-arrow {
+	position: absolute;
+	top: 0.6em;
+	right: 1.2em;
+	cursor: pointer;	
+}
+#timer .drop-down-arrow.up {
+	display: none;
+}
+#timer .drop-down-arrow img {
+	width: 1em;
+}
+#timer .time-drop-down {
+	display: none;
+	line-height: 2.5em;
+}
+#timer .time-drop-down div {
+	cursor: pointer;
+}
+#timer .hour-glass {
+	position: relative;
+	padding-top: 10.5em;
+	left: 44.375em;
+	width: 11.25em;
+}
+#timer .hour-glass img {
+	width: 11.25em;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transform: rotate(0deg);
+	transition-duration:0.4s;
+}
+#timer .hour-glass img.rotate {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
+	transition-duration:0.4s;
+}
+#timer .time-bar {
+	position: relative;
+	margin-top: 6.6em;
+	left: 32.5em;
+	width: 35em;
+	height: 2.5em;
+	background-color: rgba(255,138,90,0.2);
+	border-radius: 4.5em;
+	margin-bottom: 5em;
+	overflow: hidden;
+}
+#timer .time-left {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 2.5em;
+	width: 100%;
+	text-align: center;
+	line-height: 2.5em;
+	z-index: 2;
+}
+#timer .time-progress {
+	position: relative;
+	top: 0;
+	left: -2.5em;
+	width: 0em;
+	height: 2.5em;
+	background-color: rgba(255,138,90,1);
+	box-shadow: 1em 0em 3em 2em rgba(255,138,90,1);
+	display: none;
 }

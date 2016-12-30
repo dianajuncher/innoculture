@@ -11,6 +11,6 @@ class Language extends CI_Controller {
 	function switchLanguage($language = "") {
 		$language = ($language != "") ? $language : "danish";
 		$this->session->set_userdata('language',$language);
-		redirect(base_url());
+		redirect(home_url());
 	}
 }

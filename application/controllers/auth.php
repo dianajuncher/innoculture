@@ -9,7 +9,14 @@ class Auth extends CI_Controller {
 		
 		if( isset($this->session->userdata['logged_in']) ) {
 			$data['is_loggedin'] = true;
+			$data['is_active'] = ($this->session->userdata['active'] == 1 ? true : false);
+			$data['userid'] = $this->session->userdata['userid'];
+			$data['username'] = $this->session->userdata['username'];
+			$data['role'] = $this->session->userdata['role'];
 			$data['name'] = $this->session->userdata['name'];
+			$data['email'] = $this->session->userdata['email'];
+			$data['language'] = $this->session->userdata['language'];
+			$data['game_id'] = $this->session->userdata['game_id'];
 		} else {
 			$data['is_loggedin'] = false;
 		}
@@ -20,6 +27,9 @@ class Auth extends CI_Controller {
 	public function login() {
 		$data = $this->data;
 		
+		if($data['is_loggedin']) {
+			redirect(home_url());
+		}
 		if(isset($_POST['username']) && isset($_POST['password'])) {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
@@ -37,15 +47,33 @@ class Auth extends CI_Controller {
 					'game_id' => 0
 				);
 				$this->session->set_userdata($session_data);
-				redirect(game_list_url());
+				redirect(home_url());
+			} else {
+				$data = $this->data;
+				$data['section'] = 'login';
+				$data['username'] = $username;
+				$data['password'] = $password;
+				wrap_auth_view('login',$data);
 			}
 		} else {
-			redirect(base_url());		
+			$data = $this->data;
+			$data['section'] = 'login';
+			wrap_auth_view('login',$data);
 		}
 	}
 
 	public function logout() {
 		$this->session->unset_userdata('logged_in');
-		redirect(base_url());
+		redirect(home_url());
 	}
+	
+	public function account() {
+		$data = $this->data;
+		if($data['is_loggedin']) {
+			$data['section'] = 'account';
+			wrap_cms_view('account',$data);
+		} else {
+			redirect(login_url());
+		}
+	}	
 }

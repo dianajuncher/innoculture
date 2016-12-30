@@ -53,19 +53,20 @@ $route['default_controller'] = 'game/home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['language/(:any)'] =					'language/switchLanguage/$1';
+
 $route['login'] =							'auth/login';
 $route['logout'] =							'auth/logout';
-$route['language/(:any)'] =					'language/switchLanguage/$1';
-$route['account'] =							'game/account';
-$route['game_list'] = 						'game/game_list';
-$route['game_create'] = 					'game/game_create';
-$route['game_delete/(:any)'] =				'game/game_delete/$1';
-$route['game/(:any)'] = 					'game/game/$1';
-$route['game_resources/(:any)'] = 			'game/game_resources/$1';
-$route['game_manage'] =						'game/game_manage';
-$route['game_manage/(:any)'] =				'game/game_manage/$1';
-$route['game_manage/(:any)/(:any)'] =		'game/game_manage/$1/$2';
-$route['game_present'] =					'game/game_present';
-$route['game_present/(:any)'] =				'game/game_present/$1';
-$route['game_round_result'] =				'game/game_round_result';
-$route['game_leaderboard'] =				'game/game_leaderboard';
+$route['account'] =							'auth/account';
+
+$route['home'] = 							'game/home';
+$route['preparation'] = 					'game/preparation';
+
+$route['overview'] =						'game/overview';
+$route['place_chips/(:any)'] =				'game/place_chips/$1';
+$route['keywords/(:any)'] =					'game/keywords/$1';
+
+$route['presentation'] =					'game/presentation';
+$route['result'] =							'game/result';
+$route['leaderboard'] =						'game/leaderboard';
+$route['timer'] =							'game/timer';

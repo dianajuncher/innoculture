@@ -1,18 +1,33 @@
 <?php
-
-    function wrap_page_view($page, $data=NULL) {
+	function wrap_auth_view($page,$data=NULL) {
         $CI =& get_instance();
-        $CI->load->view('header', $data);
-        $CI->load->view($page, $data );
-        $CI->load->view('footer', $data);
+        $CI->load->view('auth/header', $data);
+        $CI->load->view('auth/'.$page, $data);
+        $CI->load->view('auth/footer', $data);	
+	}
+
+    function wrap_cms_view($page, $data=NULL) {
+        $CI =& get_instance();
+        $CI->load->view('cms/header', $data);
+        $CI->load->view('cms/'.$page, $data);
+        $CI->load->view('cms/footer', $data);
     }
 	
 	function wrap_tablet_view($page, $data=NULL) {
         $CI =& get_instance();
-        $CI->load->view('header_tablet', $data);
-        $CI->load->view($page, $data );
-        $CI->load->view('footer_tablet', $data);
+        $CI->load->view('tablet/header', $data);
+        $CI->load->view('tablet/'.$page, $data );
+        $CI->load->view('tablet/footer', $data);
 	}
+
+	function wrap_projector_view($page, $data=NULL) {
+        $CI =& get_instance();
+        $CI->load->view('projector/header', $data);
+        $CI->load->view('projector/'.$page, $data );
+        $CI->load->view('projector/footer', $data);
+	}
+
+
 	
 	function add_js_file($file) {
 		$CI =& get_instance();

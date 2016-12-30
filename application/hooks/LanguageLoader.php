@@ -7,9 +7,9 @@ class LanguageLoader
 		
 		$language = $ci->session->userdata('language');
         if ($language=="english") {
-            $ci->lang->load('auth',$ci->session->userdata('language'));
+            $ci->lang->load('dictionary',$ci->session->userdata('language'));
         } else {
-            $ci->lang->load('auth','danish');
+            $ci->lang->load('dictionary','danish');
         }
     }
 }
